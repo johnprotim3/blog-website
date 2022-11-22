@@ -1,6 +1,5 @@
-It is a product review website made for the client "Rana Kanti". This app is hosted on heroku and also have a git remote.
+This is my final semester project. 
+Its made by John Protim.
 
-Link: https://itemsking.herokuapp.com/
-It is mainly a product review website.
 
 Technoglogies used: HTML, CSS, Bootstrap, Node, Mongoose
