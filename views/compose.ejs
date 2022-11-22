@@ -1,0 +1,29 @@
+<%- include('partials/header') -%>
+<h1>Compose</h1>
+ <form action="/IwAR32a0SgMkjYQRu9EAfgulJbuptxKJxEAWvw95TQ8gKEgnfsPsTWGrrjop8composeIwAR32a0SgMkjYQRu9EAfgulJbuptxKJxEAWvw95TQ8gKEgnfsPsTWGrrjop8" method="post">
+  <div class="form-group">
+      <label for="postCategory">Catagory</label>
+      <input type="text" list="categories" class="form-control change-content-size" name="categoryName" required/>
+    <datalist id="categories">
+      <!-- Sent the list of category from app.js to recieve all the options using ejs -->
+      <% foundCatagories.forEach(function(foundCatagory){%>
+          <option> <%= foundCatagory.category %></option>
+    <%  }) %>
+
+    </datalist>
+    </div>
+
+  <div class="form-group mt-4">
+    <label for="postTitle">Title</label>
+    <input class="form-control change-content-size" id="postTitle" type="text" name="postTitle" required>
+  </div>
+
+  <div class="form-group mt-4">
+    <label for="postBody">Post</label>
+    <textarea class="form-control change-content-size" id="postBody" rows="5" name="postBody" required></textarea>
+  </div>
+
+  <button type="submit" class="btn btn-success mt-2">Publish</button>
+</form>
+
+<%- include('partials/footer') -%>

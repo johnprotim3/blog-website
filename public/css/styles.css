@@ -1,0 +1,390 @@
+body{
+  height: 100vh;
+  margin: 0;
+  background-color: #BBE1FA;
+  color: #1B262C;
+}
+
+/* #whole-body-container{
+  height: 100vh;
+} */
+
+.container-fluid {
+    padding-top: 4.375rem;
+    padding-bottom: 4.375rem;
+}
+
+  .navbar {
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+      border: 0;
+      border-radius: 0;
+      margin-bottom: 0;
+      letter-spacing: 0.313rem;
+  }
+
+  /* Small devices (landscape phones, 576px and up) */
+  @media (min-width: 576px) {
+    .navbar{
+      font-size: 2rem;
+    }
+    .navbar-toggler{
+      font-size: 2rem;
+    }
+    .navbar-brand{
+      font-size: 2rem;
+    }
+    body{
+      font-size: 2rem;
+    }
+   }
+
+  /* Medium devices (tablets, 768px and up) */
+  @media (min-width: 768px) {
+    .navbar{
+      font-size: 2rem;
+    }
+    .navbar-toggler{
+      font-size: 2rem;
+    }
+    .navbar-brand{
+      font-size: 2rem;
+    }
+    body{
+      font-size: 2rem;
+    }
+   }
+
+  /* Large devices (desktops, 992px and up) */
+  @media (min-width: 992px) {
+    .navbar{
+      font-size: 1rem;
+    }
+    .navbar-toggler{
+      font-size: 1rem;
+    }
+    .navbar-brand{
+      font-size: 1rem;
+    }
+    body{
+      font-size: 1rem;
+    }
+   }
+
+  /* X-Large devices (large desktops, 1200px and up) */
+  @media (min-width: 1200px) {
+    .navbar{
+      font-size: 1rem;
+    }
+    .navbar-toggler{
+      font-size: 1rem;
+    }
+    .navbar-brand{
+      font-size: 1rem;
+    }
+    body{
+      font-size: 1rem;
+    }
+   }
+
+  /* XX-Large devices (larger desktops, 1400px and up) */
+  @media (min-width: 1400px) {
+    .navbar{
+      font-size: 1.2rem;
+    }
+    .navbar-toggler{
+      font-size: 1.2rem;
+    }
+    .navbar-brand{
+      font-size: 1.2rem;
+    }
+    body{
+      font-size: 1rem;
+    }
+   }
+
+.navbar-nav  li a:hover {
+    color: #1abc9c !important;
+}
+
+/*************Footer************/
+.footer-body{
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+	height: 100vh;
+}
+
+
+.footer{
+	width: 100vw;
+	background-color: #1B262C;
+	margin-top: auto;
+}
+
+/* .footer p{
+	margin: 0;
+  color: #BBE1FA;
+  font-size: 12px;
+  text-align: center;
+  line-height: 3rem;
+} */
+
+
+/*************Sign In Page************/
+.sign-in-body{
+  display: -ms-flexbox;
+  display: -webkit-box;
+  display: flex;
+  -ms-flex-align: center;
+  -ms-flex-pack: center;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #f5f5f5;
+}
+
+.form-signin {
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+}
+.form-signin .checkbox {
+  font-weight: 400;
+}
+
+.form-signin .form-control {
+  position: relative;
+  box-sizing: border-box;
+  height: auto;
+  padding: 10px;
+}
+
+/*This section is for changing font size of the login size according to the screen size
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+  .form-signin .form-control {
+    font-size: 2rem; //Here is font size change
+  }
+ }
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  .form-signin .form-control {
+    font-size: 2rem; //Here is font size change
+  }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  .form-signin .form-control {
+    font-size: 1rem; //Here is font size change
+  }
+ }
+
+/* X-Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+  .form-signin .form-control {
+    font-size: 1rem; //Here is font size change
+  }
+}
+
+/* XX-Large devices (larger desktops, 1400px and up) */
+@media (min-width: 1400px) {
+  .form-signin .form-control {
+    font-size: 1rem; //Here is font size change
+  }
+}
+
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+
+/******* Admin Panel Size Controlling ****/
+@media (min-width: 576px) {
+  .admin-panel-button{
+      font-size: 2rem;
+  }
+ }
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  .admin-panel-button{
+    font-size: 2rem;
+  }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  .admin-panel-button{
+    font-size: 1rem;
+  }
+ }
+
+/* X-Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+  .admin-panel-button{
+    font-size: 1rem;
+  }
+}
+
+/* XX-Large devices (larger desktops, 1400px and up) */
+@media (min-width: 1400px) {
+  .admin-panel-button{
+    font-size: 1rem;
+  }
+}
+
+/***** Navbar *****/
+.navbar-content{
+  padding: 0;
+}
+
+
+/****** Change Home Content Page Size COntrolling ****/
+@media (min-width: 576px) {
+  .change-content-size{
+      font-size: 2rem;
+  }
+ }
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  .change-content-size{
+    font-size: 2rem;
+  }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  .change-content-size{
+    font-size: 1rem;
+  }
+ }
+
+/* X-Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+  .change-content-size{
+    font-size: 1rem;
+  }
+}
+
+/**************Home Page Parralax Effect************/
+
+.caption {
+  position: absolute;
+  width: 100%;
+  top: 25%;
+  text-align: center;
+}
+
+.parallax-top {
+  position: relative;
+  background-image: url("/images/treeimg.gif");
+  height: 90%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-color: #BBE1FA;
+}
+
+
+.parallax-top-text{
+  /* background-color: #1B262C; */
+  text-align: center;
+   /* color: #BBE1FA; */
+   color: #1B262C;
+   background-color: #BBE1FA80;
+  margin: 1.25rem auto;
+}
+
+.parallax-middle{
+  position: relative;
+  background-image: url("/images/social-media.png");
+  height: 80%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-color: #BBE1FA;
+  margin: 0;
+  margin-top: -7px;
+}
+
+.home-main-content{
+  background-color:#1B262C;
+  color: #BBE1FA;
+  padding: 20px 0;
+}
+
+#parralax-footer{
+  /* width: 100vw; */
+	/* height: 3rem; */
+	background-color: #1B262C;
+	margin-top: auto;
+
+}
+
+#parralax-footer p{
+  color: #BBE1FA;
+}
+
+.social-media-link{
+  width: 50%;
+  color: #BBE1FA;
+}
+
+
+.parralax-footer-img{
+  width: 48px;
+  height: 48px;
+  }
+
+
+/***COntroling all the buttons in the website**/
+.btn{
+background-color:#1B262C;
+color: #BBE1FA;
+}
+
+@media (min-width: 576px) {
+  .btn{
+      font-size: 2rem;
+  }
+ }
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  .btn{
+    font-size: 2rem;
+  }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  .btn{
+    font-size: 1rem;
+  }
+ }
+
+/* X-Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+  .btn{
+    font-size: 1rem;
+  }
+}

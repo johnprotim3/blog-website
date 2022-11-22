@@ -1,0 +1,37 @@
+ <%- include('partials/parralaxheader') -%>
+
+  <div class="caption">
+    <div class="parallax-top-text container">
+    <h1><%= homeDefaultContent %> </h1>
+    </div>
+  </div>
+</div>
+
+<div class="home-main-content">
+  <div class="container ">
+  <!--  This Loop is for showing the array in reverse,
+  So that the user can see the last 5 posts admin has posted in the website -->
+
+  <% for(var i= (allPosts.length-1); i>=(0); i--){ %>
+  <h1 class="mt-5">
+    <%  if(i>=0){ %>
+    <%= allPosts[i].title %>
+    <%  } %>
+  </h1>
+
+  <p>
+    <%  if(i>=0){ %>
+    <%= allPosts[i].body.substring(0,500) + "..." %>
+    <a href="/posts/<%= allPosts[i].title %>">Read More</a>
+    <%  } %>
+  </p>
+  <% } %>
+  </div>
+</div>
+
+
+<div class="parallax-middle">
+    <h1 class="parallax-middle-text"></h1>
+</div>
+
+<%- include('partials/parralaxfooter') -%>

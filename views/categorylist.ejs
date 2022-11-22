@@ -1,0 +1,22 @@
+<%- include('partials/header') -%>
+<h1 class="text-center" >Select A Category</h1>
+
+<div class="form-group">
+<form class="" action="/categoryselect" method="post">
+  <select class="form-control" name="selectedCategory" required>
+    <!-- Sent the collection of CategorizedPost from app.js using ejs -->
+    <% foundCatagories.forEach(function(foundCatagory){%>
+        <option> <%= foundCatagory.category %></option>
+  <%  }) %>
+
+  </select>
+
+  <div class="form-group" style="margin-top: 15px;">
+    <button type="submit" class="btn btn-primary form-control">Search</button>
+  </div>
+
+</form>
+</div>
+
+
+<%- include('partials/footer') -%>

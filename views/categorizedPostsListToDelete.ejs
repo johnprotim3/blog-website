@@ -1,0 +1,25 @@
+<%- include('partials/header') -%>
+
+
+<h1> <%= category %> </h1>
+
+
+<!--  This Loop is for showing the array in reverse,
+ that is present in this cateogry document -->
+
+<% for(var i= (allPosts.length-1); i>=(0); i--){ %>
+<h2>
+  <%  if(i>=0){ %>
+  <%= allPosts[i].title %>
+  <%  } %>
+</h2>
+
+<p>
+  <%  if(i>=0){ %>
+  <%= allPosts[i].body.substring(0,100) + "..." %>
+  <a href="/v7F51kyRQIJ6O3yRRwmKvo-JUiSdF2Bvc2l9fDsHaOiWkbul-deletepost-OYCdO5XfasiT8pgmIwIudl2d66r58A2DtfKw/<%= allPosts[i].title %>">Read More</a>
+  <%  } %>
+</p>
+<% } %>
+
+<%- include('partials/footer') -%>

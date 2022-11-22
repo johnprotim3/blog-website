@@ -1,0 +1,12 @@
+<%- include('partials/header'); -%>
+
+<form class="" action="/v7F51kyRQIJ6O3yRRwmKvo-JUiSdF2Bvc2l9fDsHaOiWkbuldeletepostOYCdO5XfasiT8pgmIwIudl2d66r58A2DtfKw" method="post">
+
+  <h1><%= postTitle %></h1>
+  <h3>in <%= postCategory %> Category </h3>
+  <p><%= postBody %></p>
+
+  <input type="hidden" name="CategoryToDeletePost" value="<%= postCategory %>"></input>
+  <button type="submit" class="btn btn-danger btn-lg" name="postToDelete" value="<%= postTitle %>">Delete</button>
+</form>
+<%- include('partials/footer'); -%>

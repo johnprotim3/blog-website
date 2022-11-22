@@ -1,0 +1,22 @@
+<%- include('partials/header') -%>
+<h1>Select A Category</h1>
+
+<div class="form-group">
+<form class="" action="/B79F7HZbd0j24vqcUiS68xVLOJlCixT33M2YchS0ellvHDoJZirxFJ89qdeletecategoryselectB79F7HZbd0j24vqcUiS" method="post">
+  <select class="form-control change-content-size" name="selectedCategory" required>
+    <!-- Sent the list of category from app.js to recieve all the options using ejs -->
+    <% foundCatagories.forEach(function(foundCatagory){%>
+        <option> <%= foundCatagory.category %></option>
+  <%  }) %>
+
+  </select>
+
+  <div class="form-group" style="margin-top: 15px;">
+    <button type="submit" class="btn btn-primary form-control">Ok</button>
+  </div>
+
+</form>
+</div>
+
+
+<%- include('partials/footer') -%>
