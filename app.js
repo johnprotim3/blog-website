@@ -7,7 +7,9 @@ const app = express();
 
 app.enable('trust proxy');
 app.set('view engine', 'ejs');
-mongoose.connect('mongodb+srv://ranashill:adminrana@ranashillblogwebsiteclu.y5aqm.mongodb.net/blogDB');
+
+
+mongoose.connect('mongodb+srv://johnprotim:nothingtoworry1122@blog.ufehqge.mongodb.net/blogDB');
 app.use(bodyParser.urlencoded({
   extended: true
 }));
@@ -73,6 +75,7 @@ app.get('/', function(req, res) {
       });
     }
   });
+
 });
 
 app.get('/about', function(req, res) {
@@ -134,7 +137,7 @@ app.post('/IwAR32a0SgMkjYQRu9EAfgulJbuptxKJxEAWvw95TQ8gKEgnfsPsTWGrrjop8composeI
               categorizedPost.save();
             }
         });
-      res.redirect('/jop895TQwuofhro-ynbadminpanel-nye-zainwuofhro-ynbadminpanelvdd-zain-nye');
+      res.redirect('/adminpanel');
 
 });
 
@@ -236,7 +239,7 @@ app.post('/v7F51kyRQIJ6O3yRRwmKvo-JUiSdF2Bvc2l9fDsHaOiWkbuldeletepostOYCdO5Xfasi
             //If Successfully Deleted then first console and return to home page for now
             //After Everything is completed it should redirect to admin panel
             //console.log("Deleted Successfully");
-            res.redirect("/jop895TQwuofhro-ynbadminpanel-nye-zainwuofhro-ynbadminpanelvdd-zain-nye");
+            res.redirect("/adminpanel");
           }
         });
       }
@@ -265,7 +268,7 @@ app.post('/6usggun3ZNN1Gd3TyQvJcC8O25OKEEff9zVzNmjchangehomecontentJbuptxKJJbupt
     content: homeStartingContent
   });
   homeContent.save();
-  res.redirect("/jop895TQwuofhro-ynbadminpanel-nye-zainwuofhro-ynbadminpanelvdd-zain-nye");
+  res.redirect("/adminpanel");
 });
 
 //Serve the change about us content page to admin
@@ -288,13 +291,13 @@ app.post('/rRgbcAeBO8SNBwyz53G6CsHoyjuTp6wuyfouCNchangeaboutusVcXc9O7X3JRUkI9Rtf
     content: aboutContent
   });
   aboutChangedcontent.save();
-  res.redirect("/jop895TQwuofhro-ynbadminpanel-nye-zainwuofhro-ynbadminpanelvdd-zain-nye")
+  res.redirect("/adminpanel")
 });
 
 
 
 
-app.get('/jop895TQwuofhro-ynbadminpanel-nye-zainwuofhro-ynbadminpanelvdd-zain-nye', function(req, res){
+app.get('/adminpanel', function(req, res){
     res.render('adminpanel');
 })
 
@@ -308,11 +311,11 @@ app.post('/ranaviloginkorbe', function(req, res){
   //console.log("Password = " + password);
   //Checking if the username and password is matching for any of the two admins
   if(username === admins[0] && password === adminpasswords[0]){
-    res.redirect('/jop895TQwuofhro-ynbadminpanel-nye-zainwuofhro-ynbadminpanelvdd-zain-nye');
+    res.redirect('/adminpanel');
   }
 
   else if(username === admins[1] && password === adminpasswords[1]){
-    res.redirect('/jop895TQwuofhro-ynbadminpanel-nye-zainwuofhro-ynbadminpanelvdd-zain-nye');
+    res.redirect('/adminpanel');
   }
 
   else{
