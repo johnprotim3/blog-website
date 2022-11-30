@@ -17,7 +17,7 @@
 <p>
   <%  if(i>=0){ %>
   <%= allPosts[i].body.substring(0,100) + "..." %>
-  <a href="/v7F51kyRQIJ6O3yRRwmKvo-JUiSdF2Bvc2l9fDsHaOiWkbul-deletepost-OYCdO5XfasiT8pgmIwIudl2d66r58A2DtfKw/<%= allPosts[i].title %>">Read More</a>
+  <a href="/deletepost/<%= allPosts[i].title %>">Read More</a>
   <%  } %>
 </p>
 <% } %>

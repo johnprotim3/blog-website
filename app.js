@@ -3,24 +3,49 @@ const bodyParser = require("body-parser");
 const ejs = require("ejs");
 const _ = require('lodash');
 const mongoose = require('mongoose');
+const session = require('express-session')
+const passport = require('passport');
+const passportLocalMongoose = require('passport-local-mongoose');
 const app = express();
-
-app.enable('trust proxy');
-app.set('view engine', 'ejs');
-
-
-mongoose.connect('mongodb+srv://johnprotim:nothingtoworry1122@blog.ufehqge.mongodb.net/blogDB');
-app.use(bodyParser.urlencoded({
-  extended: true
-}));
-app.use(express.static("public"));
 
 var homeStartingContent = "Lacus vel facilisis volutpat est velit egestas dui id ornare.";
 var aboutContent = "Hac habitasse platea dictumst vestibulum rhoncus est pellentesque.";
 var contactContent = "Scelerisque eleifend donec pretium vulputate sapien.";
 var currentCategoryToDeletePost = '';
-const admins = ["ranakanti", "rockyshill"];
-const adminpasswords = ["Ch+T_jbDcN=x_e5t", "W2#W$QtB2fB#REvZ"];
+const admin = "jhonprotim@blogpost.com";
+const adminPassword = "nothingtoworry";
+
+app.enable('trust proxy');
+app.set('view engine', 'ejs');
+app.use(bodyParser.urlencoded({ extended: false }))
+
+app.use(session({
+    secret: 'Our little secret.',
+    resave: false,
+    saveUninitialized: false,
+  }))
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+mongoose.connect('mongodb+srv://johnprotim:nothingtoworry1122@blog.ufehqge.mongodb.net/blogDB', {useNewUrlParser: true, useUnifiedTopology: true});
+
+app.use(express.static("public"));
+app.set('view engine', 'ejs');
+
+const adminSchema = new mongoose.Schema({
+  email:String,
+  password: String
+});
+
+adminSchema.plugin(passportLocalMongoose);
+const Admin = new mongoose.model('Admin', adminSchema);
+
+// use static authenticate method of model in LocalStrategy
+passport.use(Admin.createStrategy());
+// use static serialize and deserialize of model for passport session support
+passport.serializeUser(Admin.serializeUser());
+passport.deserializeUser(Admin.deserializeUser());
 
 const postSchema = new mongoose.Schema({
   title: {
@@ -52,7 +77,22 @@ const defaultContentsSchema = new mongoose.Schema({
 
 const DefaultContent = mongoose.model('Defaultcontent', defaultContentsSchema);
 
+
 app.get('/', function(req, res) {
+  
+  /*Admin.register({username: admin}, adminPassword, function(err, user){
+    if(err)
+    {
+        console.log("Registration error " +err);
+    }
+    else{
+        passport.authenticate("local")(req, res, function(){
+            //res.redirect('/secrets');
+        })
+    }
+  })*/
+
+
   Post.find({}, function(err, foundposts){
     if(!err){
       //Find the Default home content from the DefaultContent Collection
@@ -97,20 +137,24 @@ app.get('/about', function(req, res) {
 });
 
 
-app.get('/IwAR32a0SgMkjYQRu9EAfgulJbuptxKJxEAWvw95TQ8gKEgnfsPsTWGrrjop8composeIwAR32a0SgMkjYQRu9EAfgulJbuptxKJxEAWvw95TQ8gKEgnfsPsTWGrrjop8', function(req, res) {
-  //Search in the   CategorizedPost Collections and pass the collection as an array
-  //Then Compose.ejs page should show all the categories from the array
-  CategorizedPost.find({}, function(err, foundPosts){
-    if(foundPosts){
-      res.render('compose',{
-        foundCatagories: foundPosts
-      });
-    }
-  });
+app.get('/compose', function(req, res) {
+  if(req.isAuthenticated()){
+    //Search in the   CategorizedPost Collections and pass the collection as an array
+    //Then Compose.ejs page should show all the categories from the array
+    CategorizedPost.find({}, function(err, foundPosts){
+      if(foundPosts){
+        res.render('compose',{
+          foundCatagories: foundPosts
+        });
+      }
+    });
+  }else{
+      res.redirect('/login');
+  }
 });
 
 
-app.post('/IwAR32a0SgMkjYQRu9EAfgulJbuptxKJxEAWvw95TQ8gKEgnfsPsTWGrrjop8composeIwAR32a0SgMkjYQRu9EAfgulJbuptxKJxEAWvw95TQ8gKEgnfsPsTWGrrjop8', function(req, res) {
+app.post('/compose', function(req, res) {
   const capitalizeTitle =  _.capitalize(req.body.postTitle);
   const capitalizedCategory = _.capitalize(req.body.categoryName);
     //console.log(req.body);
@@ -182,20 +226,26 @@ app.post('/categoryselect', function(req, res){
   });
 });
 
-app.get('/B79F7HZbd0j24vqcUiS68xVLOJlCixT33M2YchS0ellvHDoJZirxFJ89qdeletecategoryselectB79F7HZbd0j24vqcUiS', function(req, res){
-  // Search in the   CategorizedPost Collections and pass the collection as an array
-  // Then deleteCategorySelect.ejs page should show all the categories from the array
-  CategorizedPost.find({}, function(err, foundPosts){
-    if(foundPosts){
-      res.render('deletecategoryselect',{
-        foundCatagories: foundPosts
-      });
-    }
-  });
+app.get('/deletecategoryselect', function(req, res){
+  if(req.isAuthenticated()){
+      // Search in the   CategorizedPost Collections and pass the collection as an array
+      // Then deleteCategorySelect.ejs page should show all the categories from the array
+
+    CategorizedPost.find({}, function(err, foundPosts){
+      if(foundPosts){
+        res.render('deletecategoryselect',{
+          foundCatagories: foundPosts
+        });
+      }
+    });
+
+  }else{
+      res.redirect('/login');
+  }
 });
 
 
-app.post('/B79F7HZbd0j24vqcUiS68xVLOJlCixT33M2YchS0ellvHDoJZirxFJ89qdeletecategoryselectB79F7HZbd0j24vqcUiS', function(req, res){
+app.post('/deletecategoryselect', function(req, res){
   //console.log(req.body.selectedCategory);
   let selectedCategory = req.body.selectedCategory;
   currentCategoryToDeletePost = selectedCategory;
@@ -211,7 +261,7 @@ app.post('/B79F7HZbd0j24vqcUiS68xVLOJlCixT33M2YchS0ellvHDoJZirxFJ89qdeletecatego
   });
 });
 
-app.get('/v7F51kyRQIJ6O3yRRwmKvo-JUiSdF2Bvc2l9fDsHaOiWkbul-deletepost-OYCdO5XfasiT8pgmIwIudl2d66r58A2DtfKw/:postName', function(req, res) {
+app.get('/deletepost/:postName', function(req, res) {
   const capitalizeTitle = req.params.postName;
   Post.findOne({title: capitalizeTitle}, function(err, foundPost){
       if(!err){
@@ -225,7 +275,7 @@ app.get('/v7F51kyRQIJ6O3yRRwmKvo-JUiSdF2Bvc2l9fDsHaOiWkbul-deletepost-OYCdO5Xfas
 });
 
 //For Deleting the post from Post and CategorizedPost Collection
-app.post('/v7F51kyRQIJ6O3yRRwmKvo-JUiSdF2Bvc2l9fDsHaOiWkbuldeletepostOYCdO5XfasiT8pgmIwIudl2d66r58A2DtfKw', function(req, res){
+app.post('/deletepost', function(req, res){
   //console.log(req.body);
   //Finding and deleting the post from Post Collection
   Post.findOneAndDelete({title: req.body.postToDelete}, function(err, foundPost){
@@ -247,13 +297,16 @@ app.post('/v7F51kyRQIJ6O3yRRwmKvo-JUiSdF2Bvc2l9fDsHaOiWkbuldeletepostOYCdO5Xfasi
 });
 
 //Serve the change home content page to admin
-app.get('/6usggun3ZNN1Gd3TyQvJcC8O25OKEEff9zVzNmjchangehomecontentJbuptxKJJbuptxKJ', function(req, res){
-  //res.send("Change Home Content Page")
-  res.render('changehomecontent');
+app.get('/changehomecontent', function(req, res){
+  if(req.isAuthenticated()){
+    res.render('changehomecontent');
+  }else{
+      res.redirect('/login');
+  }
 });
 
 //Recieve the text that has to be change in home content
-app.post('/6usggun3ZNN1Gd3TyQvJcC8O25OKEEff9zVzNmjchangehomecontentJbuptxKJJbuptxKJ', function(req, res){
+app.post('/changehomecontent', function(req, res){
   //console.log("New Home Text " + req.body.newHomeText);
   homeStartingContent = req.body.newHomeText;
   //Search in Deafult Contect collection if previously some content named home exist then delete it
@@ -272,12 +325,17 @@ app.post('/6usggun3ZNN1Gd3TyQvJcC8O25OKEEff9zVzNmjchangehomecontentJbuptxKJJbupt
 });
 
 //Serve the change about us content page to admin
-app.get('/rRgbcAeBO8SNBwyz53G6CsHoyjuTp6wuyfouCNchangeaboutusVcXc9O7X3JRUkI9RtfLD1gU', function(req, res){
+app.get('/changeaboutus', function(req, res){
+  if(req.isAuthenticated()){
     res.render('changeaboutuscontent');
+  }else{
+      res.redirect('/login');
+  }
+    
 });
 
 //Recieve the text that has to be change in about us content
-app.post('/rRgbcAeBO8SNBwyz53G6CsHoyjuTp6wuyfouCNchangeaboutusVcXc9O7X3JRUkI9RtfLD1gU', function(req, res){
+app.post('/changeaboutus', function(req, res){
   aboutContent = req.body.newAboutusText;
   //Search in Deafult Contect collection if previously some content named about exist then delete it
   DefaultContent.findOneAndDelete({name:'about'}, function(err, docs){
@@ -295,40 +353,37 @@ app.post('/rRgbcAeBO8SNBwyz53G6CsHoyjuTp6wuyfouCNchangeaboutusVcXc9O7X3JRUkI9Rtf
 });
 
 
-
-
 app.get('/adminpanel', function(req, res){
-    res.render('adminpanel');
+  if(req.isAuthenticated()){
+      res.render('adminpanel');
+  }else{
+      res.redirect('/login');
+  }
 })
 
-
-app.post('/ranaviloginkorbe', function(req, res){
-  let username = req.body.username;
-  let password = req.body.password;
-  username = _.lowerCase(username); //Converting the username to all lowerCase
-
-  //console.log("Username = " + username);
-  //console.log("Password = " + password);
-  //Checking if the username and password is matching for any of the two admins
-  if(username === admins[0] && password === adminpasswords[0]){
-    res.redirect('/adminpanel');
-  }
-
-  else if(username === admins[1] && password === adminpasswords[1]){
-    res.redirect('/adminpanel');
-  }
-
-  else{
-    res.redirect('/ranaviloginkorbe');
-  }
-
+app.get('/login', function(req,res){
+  res.render('login');
 });
 
-app.get('/:ranaviloginkorbe', function(req,res){
-  // This line converts the string that is put by admin to all lowercase
-  if(_.lowerCase(req.params.ranaviloginkorbe) === 'ranaviloginkorbe'){
-    res.render('login');
-  }
+app.post('/login', function(req, res){
+
+  const user = new Admin({
+    username: req.body.username,
+    password: req.body.password
+})
+
+req.login(user, function(err){
+    if(err)
+    {
+        console.log(err);
+        res.redirect('/login');
+    }
+    else{
+        passport.authenticate("local")(req, res, function(){
+            res.redirect('/adminpanel');
+        })
+    }
+})
 
 });
 
