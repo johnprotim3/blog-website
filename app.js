@@ -164,7 +164,7 @@ app.post('/compose', function(req, res) {
         body: req.body.postBody,
       });
       post.save();
-        //First Find The Catagory
+        //First Find The Catagory and then save
         CategorizedPost.findOne({category: capitalizedCategory}, function(err, foundCategory){
           //if category prevoiusly existed in the db then add new post in this category
           if(foundCategory){
