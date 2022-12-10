@@ -12,8 +12,9 @@ var homeStartingContent = "Lacus vel facilisis volutpat est velit egestas dui id
 var aboutContent = "Hac habitasse platea dictumst vestibulum rhoncus est pellentesque.";
 var contactContent = "Scelerisque eleifend donec pretium vulputate sapien.";
 var currentCategoryToDeletePost = '';
-const admin = "jhonprotim@blogpost.com";
-const adminPassword = "nothingtoworry";
+
+//const admin = "jhonprotim@blogpost.com";
+//const adminPassword = "nothingtoworry";
 
 app.enable('trust proxy');
 app.set('view engine', 'ejs');
@@ -387,7 +388,26 @@ req.login(user, function(err){
 
 });
 
+
+app.get('/hello', function(req, res){
+
+  res.send("Hello world");
+
+})
+ app.get('/name',function(req,res){
+  res.send("john protim")
+
+ }
+ )
+
+ app.get('/joy', function(req,res){
+  res.send("hello joy")
+ })
+
+
 const port  = process.env.PORT || 3000;
 app.listen(port, function() {
   console.log("Server started on port 3000");
 });
+
+
